@@ -10,7 +10,7 @@ void User::update(const string &listName) {
     cout << "Lista ' " << listName << " ' aggiornata: " << endl;
 }
 
-void User::addShoppingList(ShoppingList &shoppingList) {
+void User::addShoppingList(ShoppingList shoppingList) {
     auto ptrList = make_shared<ShoppingList>(
             shoppingList);     // sto creando un puntatore condiviso chiamato ptrList che punta a una nuova istanza della classe ShoppingLis. La nuova istanza é una copia dell'oggetto shoppingList passato alla funzione
     myLists.insert(make_pair(shoppingList.getShoppingListName(),

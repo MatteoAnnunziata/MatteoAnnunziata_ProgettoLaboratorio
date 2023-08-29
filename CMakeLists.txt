@@ -3,4 +3,8 @@ project(MatteoAnnunziata_ProgettoLaboratorio)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(MatteoAnnunziata_ProgettoLaboratorio main.cpp Item.cpp Item.h ShoppingList.cpp ShoppingList.h User.cpp User.h Observer.h Subject.h)
+add_subdirectory(test)
+set(SOURCE_FILES Item.cpp Item.h Observer.h ShoppingList.cpp ShoppingList.h Subject.h User.cpp User.h test/ItemTest.cpp test/UserFixture.cpp test/ShoppingListFixture.cpp)
+add_executable(MatteoAnnunziata_ProgettoLaboratorio main.cpp)
+add_library(core ${SOURCE_FILES})
+target_link_libraries(MatteoAnnunziata_ProgettoLaboratorio core)

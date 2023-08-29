@@ -8,6 +8,7 @@
 #include <vector>
 #include <map>
 #include <list>
+#include <stdexcept>
 #include "Item.h"
 #include "Subject.h"
 #include "Observer.h"
@@ -23,6 +24,14 @@ public:
     void unsubscribe(Observer *o) override;
 
     void notify() override;
+
+    void addItem(const Item &item);
+
+    void removeItem(const string &name);
+
+    void setBought(const string &name);
+
+    int notBought();
 
     const string &getShoppingListName() const;
 
