@@ -3,7 +3,7 @@
 //
 
 #include "gtest/gtest.h"
-#include "../ShoppinglList.h"
+#include "../ShoppingList.h"
 #include "../User.h"
 
 class ShoppingListTest : public ::testing::Test {
@@ -23,40 +23,24 @@ protected:
     User user;
 };
 
-TEST_F(ShoppingListTest, TestParametrizeConstructor
-){
-ShoppingList s("grigliata");
-EXPECT_EQ(sl
-.
-
-getShoppingListName(),
-
-"grigliata");
+TEST_F(ShoppingListTest, TestParametrizeConstructor) {
+    ShoppingList s("grigliata");
+    EXPECT_EQ(s.getShoppingListName(), "grigliata");
 }
 
-TEST_F(ShoppingListTest, AddItem
-){
-Item carne("carne", "cibo", 4);
-sl.
-addItem(carne);
-int size = sl.getShoppingList().size();
-EXPECT_EQ(size,
-4);     //numero di oggetti nella lista
+TEST_F(ShoppingListTest, AddItem) {
+    Item carne("carne", "cibo", 4);
+    sl.addItem(carne);
+    int size = sl.getShoppingList().size();
+    EXPECT_EQ(size, 5);     //numero di oggetti nella lista
 
-EXPECT_EQ(sl
-.
-
-notBought(),
-
-15); //oggetti ancora da comprare
+    EXPECT_EQ(sl.notBought(), 15); //oggetti ancora da comprare
 
 // controllo che un elemento aggiunto alla lista sia effettivamente presente e verifico che sia possibile modificarne la quantitá
-auto itr = sl.getShoppingList().find(cocomero);
-itr->second->setItemQuantity(1);
-auto s = itr->second->getItemQuantity();
-EXPECT_EQ(size,
-5);
-EXPECT_EQ(s,
-1);
+    auto itr = sl.getShoppingList().find("cocomero");
+    itr->second->setItemQuantity(1);
+    auto s = itr->second->getItemQuantity();
+    EXPECT_EQ(size, 5);
+    EXPECT_EQ(s, 1);
 
 }

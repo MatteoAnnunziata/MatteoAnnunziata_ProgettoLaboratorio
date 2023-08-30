@@ -9,7 +9,9 @@ int main() {
     map<string, Item> items;
     map<string, User> users;
 
-    while (true) {
+    bool create = true;
+
+    while (create) {
         cout << "1. Crea nuovo utente" << endl;
         cout << "2. Crea una nuova lista" << endl;
         cout << "3. Crea un nuovo oggetto" << endl;
@@ -46,8 +48,8 @@ int main() {
             cout << "Nuova lista creata per l'utente: " << username << endl;
         } else if (choice == 3) {
             cout << "Seleziona l'utente:" << endl;
-            for (const auto &pair : users);
-            cout << "- " << pair.first << endl;
+            for (const auto &pair : users)
+                cout << "- " << pair.first << endl;
         }
         string username;
         cin >> username;
@@ -68,10 +70,7 @@ int main() {
         cin >> category;
 
         items.insert(make_pair(itemName, Item(itemName, category, quantity)));
-
+        cout << "Oggetto creato: " << itemName << endl;
     }
-}
-
-
 return 0;
 }

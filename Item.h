@@ -27,7 +27,10 @@ public:
     }
 
     void setItemQuantity(int itemQuantity) {
-        ItemQuantity = itemQuantity;
+        if (itemQuantity >= 0)
+            Item::ItemQuantity = itemQuantity;
+        else
+            throw std::out_of_range("La quantitá inserita é negativa");
     }
 
     bool isBought() const {

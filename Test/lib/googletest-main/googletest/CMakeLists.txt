@@ -47,7 +47,7 @@ endif ()
 # Project version:
 
 cmake_minimum_required(VERSION 3.13)
-
+set(GOOGLETEST_VERSION 1.14.0)
 project(gtest VERSION ${GOOGLETEST_VERSION} LANGUAGES CXX C)
 
 if (COMMAND set_up_hermetic_build)
