@@ -27,7 +27,7 @@ public:
 
     void addItem(const Item &item);
 
-    void removeItem(const string &name);
+    void removeItem(const string &name, int quantityToRemove = 1);
 
     void setBought(const string &name);
 
@@ -41,12 +41,11 @@ public:
 
     const list<Observer *> &getObservers() const;
 
-    const map<string, int> &getCategories() const;
+    void print() const;
 
 private:
     list<Observer *> observers;
     map<string, shared_ptr<Item>> shoppingList;
-    map<string, int> categories;                // posso usare questa mappa per tenere traccia del numero di oggetti per ogni categoria
     string shoppingListName;
 };
 

@@ -33,10 +33,6 @@ const list<Observer *> &ShoppingList::getObservers() const {
     return observers;
 }
 
-const map<string, int> &ShoppingList::getCategories() const {
-    return categories;
-}
-
 void ShoppingList::addItem(const Item &item) {
 
     auto it = shoppingList.find(item.getItemName());
@@ -44,37 +40,34 @@ void ShoppingList::addItem(const Item &item) {
     // controllo se l'oggetto é giá presente nella lista
     if (it != shoppingList.end() && it->second->getCategory() == item.getCategory()) {
         // l'oggetto é giá presente nella lista e appartiene alla stessa categoria
-        int res = it->second->getItemQuantity() + item.getItemQuantity();
-        it->second->setItemQuantity(res);
+        int newQuantity = it->second->getItemQuantity() + item.getItemQuantity();
+        it->second->setItemQuantity(newQuantity);
     } else {
         // l'oggetto non é presente nella lista o appartiene ad una categoria diversa
-        auto ipt = make_shared<Item>(item);
-        shoppingList.insert(make_pair(item.getItemName(), ipt));
+        auto newItem = make_shared<Item>(item);
+        shoppingList.insert(make_pair(item.getItemName(), newItem));
     }
 
     // notifico agli osservatori ( utenti ) che la lista é stata aggiornata
     notify();
 }
 
-void ShoppingList::removeItem(const string &name) {
+void ShoppingList::removeItem(const string &name, int quantityToRemove) {
     auto itn = shoppingList.find(name);
 
     //controllo se l'oggetto con il nome specificato é presente nella lista
     if (itn == shoppingList.end()) {
-        throw std::invalid_argument("Nome non trovato");
+        throw std::invalid_argument("L'oggetto non é presente nella lista.");
     } else {
-        // cerco l'elemento nella mappa delle categorie
-        auto it = categories.find(itn->second->getCategory());
-        // se lo trovo decremento il contatore delle categorie
-        it->second--;
-        // se il contatore é a zero, rimuovo l'elemento dalla mappa delle categorie
-        if (it->second == 0)
-            categories.erase(it);
+        //ottengo l'oggetto dalla mappa
+        shared_ptr<Item>& item = itn->second;
 
-        // imposto la quantitá dell'oggetto a zero
-        itn->second->setItemQuantity(0);
-        // rimuovo l'oggetto dalla mappa della lista della spesa
-        shoppingList.erase(itn);
+        //controllo se la quantitá da rimuovere é maggiore o uguale alla quantitá presente
+        if(quantityToRemove >= item->getItemQuantity()){
+            shoppingList.erase(itn);
+        } else{
+            item->setItemQuantity(item->getItemQuantity() - quantityToRemove);
+        }
 
         // notifico gli osservatori ( utenti ) che la lista é stata aggiornata
         notify();
@@ -110,4 +103,28 @@ int ShoppingList::notBought() {
         }
     }
     return res; // Restituisce la somma delle quantità degli oggetti che non sono ancora stati acquistati
+}
+
+void ShoppingList::print() const {
+    cout << "Nome lista: " << shoppingListName << endl << endl;
+
+    cout << "Contenuto della lista: " << endl;
+
+    for(const auto& itemPair : shoppingList){
+        const string itemName = itemPair.first;
+        const shared_ptr<Item>& item = itemPair.second;
+
+        if(item->getItemQuantity() > 0){
+            cout <<"Nome prodotto: " << itemName << endl;
+            cout<<"Categoria: " << item->getCategory() << endl;
+            cout<<"Quantitá: " << item->getItemQuantity() << endl;
+
+            if(item->isBought()){
+                cout<< "Stato: Bought" << endl;
+            } else{
+                cout << "Stato: Not bought" << endl;
+            }
+            cout<<endl;
+        }
+    }
 }
