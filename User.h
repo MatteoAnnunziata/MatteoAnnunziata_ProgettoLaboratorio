@@ -22,7 +22,7 @@ public:
 
     void update(const string &listName) override;
 
-    void addShoppingList(ShoppingList shoppingList);
+    void addShoppingList(const ShoppingList shoppingList);
 
     void removeShoppingList(const string &name);
 

@@ -91,7 +91,7 @@ void ShoppingList::setBought(const string &name) {
 }
 
 // metodo per visualizzare il numero degli oggetti ancora da acquistare
-int ShoppingList::notBought() {
+int ShoppingList::notBought() const{
     int res = 0;    // inizializzo il risultato a zero
 
     // itero attraverso ogni elemento nella mappa shoppingList
@@ -108,11 +108,15 @@ int ShoppingList::notBought() {
 void ShoppingList::print() const {
     cout << "Nome lista: " << shoppingListName << endl << endl;
 
+    cout<< "La lista " << shoppingListName << " contiene " << getTotalItems() << " elementi."<<endl<<endl;
+
     cout << "Contenuto della lista: " << endl;
 
     for(const auto& itemPair : shoppingList){
         const string itemName = itemPair.first;
         const shared_ptr<Item>& item = itemPair.second;
+
+
 
         if(item->getItemQuantity() > 0){
             cout <<"Nome prodotto: " << itemName << endl;
@@ -127,4 +131,13 @@ void ShoppingList::print() const {
             cout<<endl;
         }
     }
+}
+
+int ShoppingList::getTotalItems() const {
+    int count = 0;
+    for(const auto& itemPair : shoppingList){
+        const shared_ptr<Item>& item = itemPair.second;
+        count += item->getItemQuantity();
+    }
+    return count;
 }

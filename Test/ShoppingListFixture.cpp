@@ -54,6 +54,12 @@ TEST_F(ShoppingListTest, RemoveItem){
     EXPECT_EQ(sl.getShoppingList().size(), 3); //dovrebbe esserci un elemento in meno
 }
 
+TEST_F(ShoppingListTest, RemoveNonExistentItem) {
+    EXPECT_THROW(sl.removeItem("melone"), std::invalid_argument);
+    EXPECT_EQ(sl.getShoppingList().size(), 4); // La dimensione della lista non dovrebbe cambiare
+}
+
+
 TEST_F(ShoppingListTest, SetItemBought){
     sl.setBought("latte");
     auto itr = sl.getShoppingList().find("latte");

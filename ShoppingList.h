@@ -31,13 +31,15 @@ public:
 
     void setBought(const string &name);
 
-    int notBought();
+    int notBought() const;
 
     const string &getShoppingListName() const;
 
     void setShoppingListName(const string &shoppingListName);
 
     const map<string, shared_ptr<Item>> &getShoppingList() const;
+
+    int getTotalItems() const;
 
     const list<Observer *> &getObservers() const;
 
