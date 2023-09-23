@@ -24,7 +24,6 @@ void printAllLists(const map<string, ShoppingList>& lists) {
         const string& listName = listPair.first;
         const ShoppingList& currentList = listPair.second;
 
-        // cout << "Lista: " << listName << endl;
         currentList.print(); // Chiamiamo il metodo "print" della classe ShoppingList per stampare il contenuto di questa lista
         cout << endl;
     }

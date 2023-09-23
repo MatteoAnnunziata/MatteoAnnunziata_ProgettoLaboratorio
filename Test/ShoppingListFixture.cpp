@@ -28,6 +28,10 @@ TEST_F(ShoppingListTest, TestParametrizeConstructor) {
     EXPECT_EQ(s.getShoppingListName(), "grigliata");
 }
 
+TEST_F(ShoppingListTest, GettersAndSetters){
+    sl.setShoppingListName("Cenone di Natale");
+}
+
 TEST_F(ShoppingListTest, AddItem) {
     Item carne("carne", "cibo", 4);
     sl.addItem(carne);
@@ -43,4 +47,15 @@ TEST_F(ShoppingListTest, AddItem) {
     EXPECT_EQ(size, 5);
     EXPECT_EQ(s, 1);
 
+}
+
+TEST_F(ShoppingListTest, RemoveItem){
+    sl.removeItem("latte");
+    EXPECT_EQ(sl.getShoppingList().size(), 3); //dovrebbe esserci un elemento in meno
+}
+
+TEST_F(ShoppingListTest, SetItemBought){
+    sl.setBought("latte");
+    auto itr = sl.getShoppingList().find("latte");
+    EXPECT_TRUE(itr->second->isBought());
 }

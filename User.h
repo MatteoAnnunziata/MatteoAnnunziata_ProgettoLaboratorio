@@ -17,8 +17,7 @@ public:
 
     ~User() override {
         for (auto &itr : myLists)            // utilizzo la sintassi semplificata del range-for per iterare su tutti gli elementi
-            itr.second->unsubscribe(
-                    this); // sicuramente dovró disiscrivermi dalla lista quando viene cancellato l'utente
+            itr.second->unsubscribe(this); // sicuramente dovró disiscrivermi dalla lista quando viene cancellato l'utente
     }
 
     void update(const string &listName) override;
