@@ -12,6 +12,10 @@ using namespace std;
 class Item {
 public:
     Item(string n, string c, int q = 1) : ItemName(n), category(c), ItemQuantity(q) {
+        if(q >= 0)
+            ItemQuantity = q;
+        else
+            throw std::out_of_range("La quantità dell'oggetto è negativa. ");
     }
 
     const string &getItemName() const {

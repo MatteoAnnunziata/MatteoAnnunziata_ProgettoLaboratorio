@@ -35,33 +35,34 @@ TEST_F(ShoppingListTest, GettersAndSetters){
 TEST_F(ShoppingListTest, AddItem) {
     Item carne("carne", "cibo", 4);
     sl.addItem(carne);
-    int size = sl.getShoppingList().size();
-    EXPECT_EQ(size, 5);     //numero di oggetti nella lista
+    int size = sl.getTotalItems();
+    EXPECT_EQ(size, 15);     //numero di oggetti nella lista
 
     EXPECT_EQ(sl.notBought(), 15); //oggetti ancora da comprare
 
 // controllo che un elemento aggiunto alla lista sia effettivamente presente e verifico che sia possibile modificarne la quantitá
-    auto itr = sl.getShoppingList().find("cocomero");
-    itr->second->setItemQuantity(1);
-    auto s = itr->second->getItemQuantity();
-    EXPECT_EQ(size, 5);
+    auto itr = sl.findItem("cocomero");
+    itr->setItemQuantity(1);
+    auto s = itr->getItemQuantity();
+    size = sl.getTotalItems();
+    EXPECT_EQ(size, 11);
     EXPECT_EQ(s, 1);
 
 }
 
 TEST_F(ShoppingListTest, RemoveItem){
     sl.removeItem("latte");
-    EXPECT_EQ(sl.getShoppingList().size(), 3); //dovrebbe esserci un elemento in meno
+    EXPECT_EQ(sl.getTotalItems(), 10); //dovrebbe esserci un elemento in meno
 }
 
 TEST_F(ShoppingListTest, RemoveNonExistentItem) {
     EXPECT_THROW(sl.removeItem("melone"), std::invalid_argument);
-    EXPECT_EQ(sl.getShoppingList().size(), 4); // La dimensione della lista non dovrebbe cambiare
+    EXPECT_EQ(sl.getTotalItems(), 11); // La dimensione della lista non dovrebbe cambiare
 }
 
 
 TEST_F(ShoppingListTest, SetItemBought){
     sl.setBought("latte");
-    auto itr = sl.getShoppingList().find("latte");
-    EXPECT_TRUE(itr->second->isBought());
+    auto itr = sl.findItem("latte");
+    EXPECT_TRUE(itr->isBought());
 }

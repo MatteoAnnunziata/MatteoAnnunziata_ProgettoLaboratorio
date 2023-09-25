@@ -37,9 +37,9 @@ public:
 
     void setShoppingListName(const string &shoppingListName);
 
-    const map<string, shared_ptr<Item>> &getShoppingList() const;
-
     int getTotalItems() const;
+
+    shared_ptr<Item> findItem(const string &itemName);
 
     const list<Observer *> &getObservers() const;
 

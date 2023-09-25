@@ -93,8 +93,8 @@ int main() {
                     cin >> itemName;
 
                     // Verifico se l'oggetto é presente nella lista
-                    auto itemItr = currentListItr->second.getShoppingList().find(itemName);
-                    if(itemItr != currentListItr->second.getShoppingList().end()) {
+                    auto itemItr = currentListItr->second.findItem(itemName);
+                    if(itemItr != nullptr) {
                         int quantityToRemove = 1;
                         cout << "Quanti ne vuoi rimuovere? (Inserisci un numero maggiore di 1 per rimuoverne di piú): ";
                         cin >> quantityToRemove;

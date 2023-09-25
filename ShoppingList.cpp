@@ -25,10 +25,6 @@ void ShoppingList::setShoppingListName(const string &shoppingListName) {
     ShoppingList::shoppingListName = shoppingListName;
 }
 
-const map<string, shared_ptr<Item>> &ShoppingList::getShoppingList() const {
-    return shoppingList;
-}
-
 const list<Observer *> &ShoppingList::getObservers() const {
     return observers;
 }
@@ -140,4 +136,11 @@ int ShoppingList::getTotalItems() const {
         count += item->getItemQuantity();
     }
     return count;
+}
+
+shared_ptr<Item> ShoppingList::findItem(const string &itemName) {
+    auto it = shoppingList.find(itemName);
+    if(it != shoppingList.end())
+        return it->second;
+    return nullptr;
 }
