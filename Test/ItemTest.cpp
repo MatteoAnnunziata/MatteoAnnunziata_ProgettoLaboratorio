@@ -31,3 +31,8 @@ TEST(ItemTest, QuantityException) {
     Item it("Banana", "Frutta", 1);
     EXPECT_THROW(it.setItemQuantity(-1), std::out_of_range);
 }
+
+// Verifico che venga lanciata un'eccezione std::out_of_range quando si tenta di costruire un Item con quantità negativa
+TEST(ItemTest, NegativeQuantityConstructor){
+    ASSERT_THROW(Item("Banana", "Frutta", -2), out_of_range);
+}
